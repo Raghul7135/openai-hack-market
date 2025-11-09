@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StyleMatch | Smart Clothing Recommendations</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container">
+      <h1><span class="logo">StyleMatch</span></h1>
+      <nav>
+        <button id="toggleMode" class="btn btn-outline">👤 Switch to Admin</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Customer View (default) -->
+    <section id="customerView">
+      <div class="hero">
+        <h2>Find Your Perfect Fit</h2>
+        <p>Tell us what you need — we’ll recommend quality clothing that matches your style, budget, and values.</p>
+      </div>
+
+      <!-- Requirement Input -->
+      <section class="card mb-4">
+        <h3>🔍 Describe What You're Looking For</h3>
+        <form id="requirementForm">
+          <div class="form-grid">
+            <div>
+              <label>Type:</label>
+              <select name="type" required>
+                <option value="">— Select —</option>
+                <option>Shirt</option>
+                <option>T-Shirt</option>
+                <option>Jeans</option>
+                <option>Formal Wear</option>
+              </select>
+            </div>
+            <div>
+              <label>Fabric:</label>
+              <select name="fabric">
+                <option value="">Any</option>
+                <option>Cotton</option>
+                <option>Linen</option>
+                <option>Wool</option>
+                <option>Polyester</option>
+                <option>Rayon</option>
+              </select>
+            </div>
+            <div>
+              <label>Brand Preference:</label>
+              <input type="text" name="brand" placeholder="e.g., Allen Solly, H&M" />
+            </div>
+            <div>
+              <label>Budget (₹):</label>
+              <input type="range" name="budget" min="200" max="5000" value="1000" step="100" id="budgetRange" />
+              <output id="budgetValue">₹1,000</output>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 mt-2">Get Recommendations</button>
+        </form>
+      </section>
+
+      <!-- Recommendations -->
+      <section id="recommendations" class="hidden">
+        <h3>🎯 Recommended for You</h3>
+        <div id="productGrid" class="product-grid">
+          <!-- JS will inject cards here -->
+        </div>
+      </section>
+    </section>
+
+    <!-- Admin View (hidden by default) -->
+    <section id="adminView" class="hidden">
+      <div class="hero">
+        <h2>📊 Admin Dashboard</h2>
+        <p>Real-time insights, feedback trends, and business intelligence.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h4>📈 Weekly Queries</h4>
+          <p><strong>142</strong> customer requests</p>
+          <small>▲ 12% vs last week</small>
+        </div>
+        <div class="stat-card">
+          <h4>🧵 Top Fabric</h4>
+          <p><strong>Cotton</strong> (85% of queries)</p>
+        </div>
+        <div class="stat-card">
+          <h4>🏷️ Top Brand</h4>
+          <p><strong>Allen Solly</strong> (42% mentions)</p>
+        </div>
+        <div class="stat-card">
+          <h4>⭐ Avg. Rating</h4>
+          <p><strong>4.3/5.0</strong></p>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <h3>Recent Customer Requirements</h3>
+        <ul id="requirementList">
+          <li>“Soft cotton shirts, budget ₹800–1200” — Priya, 28</li>
+          <li>“Slim-fit formal trousers, dark color, non-crease” — Rohan, 34</li>
+          <li>“Eco-friendly t-shirts, under ₹600” — Aisha, 22</li>
+        </ul>
+      </div>
+
+      <div class="card mt-4">
+        <h3>Product Performance Insights</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Views</th>
+              <th>Wishlist Adds</th>
+              <th>Conversion</th>
+              <th>Feedback Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Cotton Formal Shirt #A12</td><td>245</td><td>62</td><td>28%</td><td>⭐ 4.6</td></tr>
+            <tr><td>Linen Kurta #K05</td><td>189</td><td>41</td><td>22%</td><td>⭐ 4.2</td></tr>
+            <tr><td>Denim Jeans Slim #J18</td><td>310</td><td>94</td><td>31%</td><td>⭐ 4.4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 StyleMatch — Intelligent Product Recommendations for Modern Retail</p>
+      <p>Data privacy & feedback loops built-in ✅</p>
+    </div>
+  </footer>
+</body>
+</html>
