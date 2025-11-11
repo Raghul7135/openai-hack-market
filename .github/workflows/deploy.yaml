@@ -1,0 +1,54 @@
+name: Deploy Recommendation System
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout code
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. Install dependencies
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. Run basic tests (optional but recommended)
+      - name: 🧪 Run tests
+        run: |
+          # Test: Can we import core modules?
+          python -c "import lightfm; print('✅ LightFM OK')"
+          python -c "from recommender import HybridRecommender; print('✅ Recommender OK')"
+          python -c "from app import app; print('✅ Flask app OK')"
+
+      # 5. Deploy Frontend to GitHub Pages
+      - name: 🌐 Deploy frontend to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'  # Upload entire repo (index.html is root)
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        if: success()
+
+      # 6. Deploy Backend to Render (optional — uncomment if using Render)
+      # - name: 🚀 Deploy backend to Render
+      #   env:
+      #     RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      #   run: |
+      #     curl -X POST https://api.render.com/v1/services/<YOUR_RENDER_SERVICE_ID>/deploys \
+      #       -H "Authorization: Bearer $RENDER_API_KEY" \
+      #       -H "Content-Type: application/json" \
+      #       -d '{"clearCache": true}'
